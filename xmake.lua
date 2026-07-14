@@ -105,7 +105,13 @@ target("llaisys")
 
     set_languages("cxx17")
     set_warnings("all", "error")
+    if is_plat("linux") then
+        add_cxflags("-fopenmp")
+        add_ldflags("-fopenmp", {force = true})
+        add_syslinks("gomp")
+    end
     add_files("src/llaisys/*.cc")
+    add_files("src/models/qwen2/*.cpp")
     set_installdir(".")
 
     
